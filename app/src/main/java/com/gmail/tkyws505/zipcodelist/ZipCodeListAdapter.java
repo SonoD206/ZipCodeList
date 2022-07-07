@@ -16,6 +16,7 @@ import java.util.List;
 public class ZipCodeListAdapter extends RecyclerView.Adapter<ZipCodeListAdapter.ViewHolder> {
 
   public static final String STREET_NAME_FORMAT = "東京都%s";
+  public static final String ZIP_CODE_FORMAT = "〒%s - %s";
 
   private List<ZipCodeModel> zipCodeModels;
 
@@ -40,7 +41,7 @@ public class ZipCodeListAdapter extends RecyclerView.Adapter<ZipCodeListAdapter.
     } else {
       holder.textViewStreetName.setVisibility(View.GONE);
     }
-    holder.textViewZipCode.setText(model.getZipCode());
+    holder.textViewZipCode.setText(String.format(ZIP_CODE_FORMAT,model.getZipCode().substring (0,3),model.getZipCode().substring(3)));
   }
 
   @Override
