@@ -28,6 +28,9 @@ public class CsvParser {
     viewModel = new ViewModelProvider((ViewModelStoreOwner) owner).get(ZipCodeViewModel.class);
   }
 
+  /**
+   * Csvファイルを読み込む
+   */
   public void readCsv() throws InterruptedException {
     AssetManager assetManager = context.getResources().getAssets();
     AtomicReference<List<ZipCodeModel>> atomicZipCodes = new AtomicReference<>();
