@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ZipCodeListAdapter extends RecyclerView.Adapter<ZipCodeListAdapter.ViewHolder> {
 
-  public static final String STREET_NAME_FORMAT = "東京都%s%s";
+  public static final String STREET_NAME_FORMAT = "東京都%s";
 
   private List<ZipCodeModel> zipCodeModels;
 
@@ -33,7 +33,13 @@ public class ZipCodeListAdapter extends RecyclerView.Adapter<ZipCodeListAdapter.
   @Override
   public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
     ZipCodeModel model = zipCodeModels.get(position);
-    holder.textViewStreetName.setText(String.format(STREET_NAME_FORMAT,model.getWardName(),model.getStreetName()));
+    holder.textViewWardName.setText(String.format(STREET_NAME_FORMAT,model.getWardName()));
+    if (!model.getStreetName().equals("")){
+      holder.textViewStreetName.setVisibility(View.VISIBLE);
+      holder.textViewStreetName.setText(model.getStreetName());
+    } else {
+      holder.textViewStreetName.setVisibility(View.GONE);
+    }
     holder.textViewZipCode.setText(model.getZipCode());
   }
 
@@ -52,11 +58,13 @@ public class ZipCodeListAdapter extends RecyclerView.Adapter<ZipCodeListAdapter.
   public static class ViewHolder extends RecyclerView.ViewHolder {
 
     TextView textViewStreetName;
+    TextView textViewWardName;
     TextView textViewZipCode;
 
     public ViewHolder(@NonNull View itemView) {
       super(itemView);
       textViewStreetName = itemView.findViewById(R.id.text_view_street_name);
+      textViewWardName = itemView.findViewById(R.id.text_view_ward_name);
       textViewZipCode = itemView.findViewById(R.id.text_view_zip_code);
     }
   }
